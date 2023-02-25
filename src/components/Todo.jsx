@@ -1,29 +1,39 @@
 import React from "react";
-import List from "./List";
-import Form from "./Form";
+import List from "./list";
+import Form from "./form";
 
 export default class Todo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
+      tasks: [],
     };
   }
 
- submitForm = (value) => {
-    const { items } = this.state;
+  submitForm = (data) => {
+    const [value, important] = data;
+    const { tasks } = this.state;
+    const newTasks = [{ value, important }, ...tasks];
+    newTasks.sort((a, b) => {
+      if (a.important && !b.important) {
+        return -1;
+      } else if (!a.important && b.important) {
+        return 1;
+      }
+      return 0;
+    });
     this.setState({
-      items: [value, ...items],
+      tasks: newTasks,
     });
   };
 
   render() {
-    const { items } = this.state;
+    const { tasks } = this.state;
     return (
       <div>
         <h1>Todo List</h1>
         {<Form onSubmit={this.submitForm} />}
-        {items.length > 0 && <List items={items} />}
+        {tasks.length > 0 && <List items={tasks} />}
       </div>
     );
   }
