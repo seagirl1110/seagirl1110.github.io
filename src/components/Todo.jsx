@@ -10,7 +10,7 @@ export default class Todo extends React.Component {
     };
   }
 
-  submitForm = (data) => {
+  addItem = (data) => {
     const [value, important] = data;
     const { tasks } = this.state;
     const newTasks = [{ value, important }, ...tasks];
@@ -28,13 +28,19 @@ export default class Todo extends React.Component {
     localStorage.setItem("todo", JSON.stringify(newTasks));
   };
 
+  removeItem = (data) => {
+    const { tasks } = this.state;
+    const newTasks = tasks.filter((item, index) => index !== data);
+    this.setState({ tasks: newTasks });
+  };
+
   render() {
     const { tasks } = this.state;
     return (
       <div>
         <h1>Todo List</h1>
-        {<Form onSubmit={this.submitForm} />}
-        {tasks.length > 0 && <List items={tasks} />}
+        {<Form onSubmit={this.addItem} />}
+        {tasks.length > 0 && <List items={tasks} onRemove={this.removeItem} />}
       </div>
     );
   }

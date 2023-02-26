@@ -7,9 +7,17 @@ export default class List extends React.Component {
     const name = cn("list-item", {
       "list-item--important": important,
     });
+    const { onRemove } = this.props;
     return (
       <li className={name} key={index}>
-        {value}
+        <span>{value}</span>
+        <button
+          onClick={() => {
+            onRemove(index);
+          }}
+        >
+          -
+        </button>
       </li>
     );
   };
