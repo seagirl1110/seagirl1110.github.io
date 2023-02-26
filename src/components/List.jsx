@@ -3,13 +3,21 @@ import cn from "classnames";
 
 export default class List extends React.Component {
   renderItem = (item, index) => {
-    const { value, important } = item;
+    const { value, important, active } = item;
     const name = cn("list-item", {
       "list-item--important": important,
+      "list-item--done": !active,
     });
-    const { onRemove } = this.props;
+    const { onRemove, onReady } = this.props;
     return (
       <li className={name} key={index}>
+        <button
+          onClick={() => {
+            onReady(index);
+          }}
+        >
+          *
+        </button>
         <span>{value}</span>
         <button
           onClick={() => {

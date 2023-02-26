@@ -4,4 +4,10 @@
     &--important {
         background-color: #f3d2df;
     }
+
+    // .list-item--done
+
+    &--done {
+        text-decoration: line-through;
+    }
 }

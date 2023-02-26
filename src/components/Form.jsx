@@ -6,6 +6,7 @@ export default class Form extends React.Component {
     this.state = {
       value: "",
       important: true,
+      active: true,
     };
     this.inputRef = React.createRef();
   }
@@ -25,9 +26,9 @@ export default class Form extends React.Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     this.inputRef.current.focus();
-    const { value, important } = this.state;
+    const data = this.state;
     const { onSubmit } = this.props;
-    onSubmit([value, important]);
+    onSubmit(data);
     this.setState({
       value: "",
     });
