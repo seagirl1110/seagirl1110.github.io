@@ -6,7 +6,7 @@ export default class Todo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [],
+      tasks: JSON.parse(localStorage.getItem("todo")) || [],
     };
   }
 
@@ -25,6 +25,7 @@ export default class Todo extends React.Component {
     this.setState({
       tasks: newTasks,
     });
+    localStorage.setItem("todo", JSON.stringify(newTasks));
   };
 
   render() {
