@@ -28,7 +28,8 @@ export default class Todo extends React.Component {
   doneItem = (index) => {
     const newTasks = [...this.state.tasks];
     const item = { ...this.state.tasks[index] };
-    item.active = false;
+    const status = item.active;
+    item.active = !status;
     newTasks[index] = item;
     this.sortItem(newTasks);
     this.setState({
