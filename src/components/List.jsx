@@ -12,26 +12,28 @@ export default class List extends React.Component {
     return (
       <li className={name} key={index}>
         <button
+          className="list-item__btn-done"
           onClick={() => {
             onReady(index);
           }}
-        >
-          *
-        </button>
-        <span>{value}</span>
+        ></button>
+        <span className="list-item__name">{value}</span>
         <button
+          className="list-item__btn-del"
           onClick={() => {
             onRemove(index);
           }}
-        >
-          -
-        </button>
+        ></button>
       </li>
     );
   };
 
   render() {
     const { items } = this.props;
-    return <ul>{items.map((item, index) => this.renderItem(item, index))}</ul>;
+    return (
+      <ul className="list">
+        {items.map((item, index) => this.renderItem(item, index))}
+      </ul>
+    );
   }
 }

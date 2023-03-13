@@ -1,13 +1,174 @@
-.list-item {
-    // .list-item--important
+@mixin btn($width: 30px) {
+    width: $width;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Open Sans", sans-serif;
+    background-color: #e1ebff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
 
-    &--important {
-        background-color: #f3d2df;
+    &:hover {
+        background-color: #cdd1ff;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: italic;
+    background: linear-gradient(0, rgba(2, 0, 36, 1) 0%, rgba(120, 120, 230, 1) 0%, rgba(5, 198, 237, 1) 45%);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: #23092c;
+}
+
+.todo {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid #7878e6;
+    border-radius: 10px;
+
+    // .todo__title
+    &__title {
+        font-family: "Caveat", cursive;
+        font-style: normal;
+    }
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 5px;
+    margin: 20px 0;
+
+    // .form__input
+    &__input {
+        width: 100%;
+        padding: 5px 10px;
+        font-size: 16px;
+        font-style: italic;
+        border: 1px solid #23092c;
+        border-radius: 5px;
+        outline: none;
+
+        &::placeholder {
+            font-size: 14px;
+        }
     }
 
-    // .list-item--done
+    // .form__important
+    &__important {
+        @include btn(60%);
+        justify-content: flex-start;
+        gap: 5px;
+        padding: 0 10px;
+        font-size: 14px;
+        color: #23092c;
+        background-color: transparent;
 
-    &--done {
-        text-decoration: line-through;
+        // .form__important--checkbox
+        &--checkbox {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    // .form__btn-add
+    &__btn-add {
+        @include btn(20%);
+        font-size: 36px;
+        font-weight: bold;
+        color: #1e9e12;
+    }
+}
+
+.list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    // .list-item
+    &-item {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        background-color: #e1ebff;
+        border-radius: 5px;
+        margin: 5px 0;
+        padding: 5px 10px;
+
+        //.list-item--done
+        &--done {
+            text-decoration: line-through;
+            text-decoration-color: #4256ac;
+            text-decoration-thickness: percentage($number: 0.15);
+        }
+
+        //.list-item--important
+        &--important {
+            background-color: #f3d2df;
+        }
+
+        // .list-item__btn-done
+        &__btn-done {
+            @include btn(20px);
+            height: 20px;
+            border: 1px solid #7878e6;
+            background-repeat: no-repeat;
+            background-position: center;
+
+            // .list-item--done .list-item__btn-done
+            .list-item--done > & {
+                background-image: url("./image/btn-done.png");
+            }
+
+            // .list-item__btn-done:hover,
+            &:hover {
+                background-image: url("./image/btn-done.png");
+                background-size: contain;
+            }
+        }
+
+        // .list-item__name
+        &__name {
+            max-width: 250px;
+            margin: 0 auto 0 10px;
+            overflow-wrap: break-word;
+        }
+
+        // .list-item__btn-del
+        &__btn-del {
+            @include btn();
+            background-image: url("./image/btn-del.svg");
+            opacity: 0;
+
+            // .list-item:hover .list-item__btn-del
+            .list-item:hover & {
+                opacity: 1;
+            }
+        }
     }
 }

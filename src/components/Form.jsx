@@ -37,8 +37,9 @@ export default class Form extends React.Component {
   render() {
     const { value, important } = this.state;
     return (
-      <form action="#" onSubmit={this.handleSubmit}>
+      <form className="form" action="#" onSubmit={this.handleSubmit}>
         <input
+          className="form__input"
           value={value}
           onChange={this.handleChange}
           ref={this.inputRef}
@@ -46,15 +47,16 @@ export default class Form extends React.Component {
           autoFocus
           required
         ></input>
-        <label>
+        <label className="form__important">
           <input
+            className="form__important--checkbox"
             type="checkbox"
             checked={important}
             onChange={this.handleChange}
           />
           important task
         </label>
-        <button type="submit">+</button>
+        <button className="form__btn-add" type="submit">+</button>
       </form>
     );
   }

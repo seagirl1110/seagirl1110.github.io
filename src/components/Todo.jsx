@@ -60,8 +60,8 @@ export default class Todo extends React.Component {
     const { tasks } = this.state;
     localStorage.setItem("todo", JSON.stringify(tasks));
     return (
-      <div>
-        <h1>Todo List</h1>
+      <div className="todo">
+        <h1 className="todo__title">Todo List</h1>
         {<Form onSubmit={this.addItem} />}
         {tasks.length > 0 && (
           <List
